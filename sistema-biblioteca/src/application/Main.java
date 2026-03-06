@@ -1,19 +1,23 @@
 package application;
 
+import application.dao.LivroDAOImpl;
+import application.interfaces.ILivroDao;
+import application.model.Livro;
 import application.util.ConnectionFactory;
 
 import java.sql.Connection;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Tentando conectar ao banco de dados...");
-        try (Connection conexao = ConnectionFactory.getConnection()) {
-            if (conexao != null) {
-                System.out.println("Sucesso!");
-            }
-        } catch (Exception e) {
-            System.out.println("Ocorreu um erro na conexao");
-            e.printStackTrace();
-        }
+        Livro livroAleatorio = new Livro();
+        livroAleatorio.setTitulo("Senhor dos Aneis");
+        livroAleatorio.setAutor("Fabricyo Silva");
+        livroAleatorio.setAnoPublicacao(1960);
+        livroAleatorio.setDiponivel(true);
+
+        ILivroDao livroDao = new LivroDAOImpl();
+
+        System.out.println("Enviando os dados...");
+        livroDao.salvar(livroAleatorio);
     }
 }
