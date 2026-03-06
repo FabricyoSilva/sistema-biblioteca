@@ -1,4 +1,4 @@
-package model;
+package application.model;
 
 public class Livro {
     private Integer id;
